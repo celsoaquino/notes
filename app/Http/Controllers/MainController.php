@@ -6,6 +6,7 @@ use App\Models\Note;
 use App\Models\User;
 use App\Services\Operations;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class MainController extends Controller
 {
@@ -40,7 +41,7 @@ class MainController extends Controller
         return redirect()->route('home');
     }
 
-    public function editNote($id)
+    public function editNote($id): View
     {
         $id = Operations::decryptId($id);
 
@@ -71,8 +72,19 @@ class MainController extends Controller
 
     public function deleteNote($id)
     {
-        // TODO implements
         $id = Operations::decryptId($id);
-        return $id;
+
+        $note = Note::find($id);
+        return view('delete_note', compact('note'));
+    }
+
+    public function deleteNoteConfirm($id){
+        $id = Operations::decryptId($id);
+
+        $note = Note::find($id);
+
+        $note->delete();
+
+        return redirect()->route('home');
     }
 }

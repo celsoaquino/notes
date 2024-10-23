@@ -5,12 +5,17 @@
                 <h3 class="my-1.5 text-lg font-bold text-gray-800">
                     {{ $note->title }}
                 </h3>
-                <p class="text-xs text-gray-400"> Created at: <strong>{{ $note->created_at->format('d-m-Y H:i:s') }}</strong></p>
+                <p class="text-xs text-gray-400"> Created at:
+                    <strong>{{ date('d-m-Y H:i:s', strtotime($note->created_at)) }}</strong></p>
+                @if($note->created_at != $note->updated_at)
+                    <p class="text-xs text-gray-400"> Updated at:
+                        <strong>{{ date('d-m-Y H:i:s', strtotime($note->updated_at))  }}</strong></p>
+                @endif
             </div>
             <div class="flex items-center gap-x-1">
                 <div class="hs-tooltip inline-block">
                     <a href="{{ route('edit', Crypt::encrypt($note->id)) }}"
-                            class="hs-tooltip-toggle size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
+                       class="hs-tooltip-toggle size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-gray-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -23,7 +28,7 @@
                 </div>
                 <div class="hs-tooltip inline-block">
                     <a href="{{ route('delete', Crypt::encrypt($note->id)) }}"
-                            class="hs-tooltip-toggle size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-red-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
+                       class="hs-tooltip-toggle size-8 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full border border-transparent text-red-500 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                              stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round"
