@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Notes</title>
     <link rel="icon" href="{{ asset('assets/images/favicon.png') }}">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="h-full">
 <div class="min-h-full">
